@@ -1,0 +1,54 @@
+to make it work you can use this logic:
+
+use this .ino to test...
+
+you can set the pinout and in case you want to add an additional input:
+
+#include <microclient-protocol.h>
+
+#include <head.h>
+
+
+#define NEW_SENSOR_UPDATE_INTERVAL 100
+
+
+
+Scheduler* scheduler;
+i2cOldReader* new_sensor;
+
+setup{
+  	scheduler = new Scheduler();
+	
+mux = new MuxPCA9544();
+  
+	adc = new AdcADS1015(ADC_MAXVOLTAGE, ADC_ADRESS);
+	int mux_channel_sensor;
+	int adc_channel_sensor;
+
+
+  new_sensor = new i2cOldReader(NEW_SENSOR_UPDATE_INTERVAL, [this](const float   v){
+#if DEBUG
+  Serial.print(" NEW ");
+  Serial.print(" M ");
+  Serial.print(mux_channel_button_sensor_);
+  Serial.print(" A ");
+  Serial.print(adc_channel_button_sensor_);
+  Serial.print(" V: ");
+  Serial.println(v);
+#endif
+     }, mux, adc, mux_channel_sensor, adc_channel_sensor);
+
+	
+  scheduler->addTask(button_sensor_);
+
+}
+
+
+
+loop{
+...
+
+  scheduler->update(); 
+...
+}
+
