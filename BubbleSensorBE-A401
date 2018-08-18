@@ -1,0 +1,31 @@
+
+/* Liquid presence (senses bubbles) sensor BE-A401 by PANASONIC  
+ * Connection diagram 
+ *  Brown --> Vcc
+ *  Black --> Output1
+ *  Blue  --> GND
+ *  White --> Output2
+*/
+
+int p1 = 2;
+int p2 = 5;
+int analogPin = 0;
+void setup() {
+  Serial.begin(9600);
+  pinMode(p1, INPUT_PULLUP); 
+  pinMode(p2, INPUT_PULLUP); 
+
+}
+
+void loop() {
+  int val = digitalRead(p1);
+  int val2 = digitalRead(p2);
+  int anVal = analogRead(analogPin);
+  
+  Serial.print(val);
+  Serial.print(val2);
+  Serial.print("\n");
+  //Serial.print(anVal);
+  //Serial.print("\n");
+  delay(300);
+}
