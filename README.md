@@ -1,2 +1,2 @@
 # arduino
-Messy folder for all the tiny sketches regarding sensor testing
+Messy folder for different building blocks/libraries that integrate (or may integrate) larger projects
